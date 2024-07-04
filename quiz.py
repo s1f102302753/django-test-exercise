@@ -9,5 +9,6 @@ def repeat(xs, n):
 
     return result
 
+
 xs = [1, 2, 3]
 print(repeat(xs, 0))
