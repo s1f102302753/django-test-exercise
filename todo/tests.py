@@ -22,7 +22,6 @@ class TaskModelTestCase(TestCase):
         self.assertEqual(task.due_at, due)
 
 
-
     def test_create_task2(self):
         task = Task(title='task2')
         task.save()
@@ -31,7 +30,6 @@ class TaskModelTestCase(TestCase):
         self.assertEqual(task.title, 'task2')
         self.assertFalse(task.completed)
         self.assertEqual(task.due_at, None)
-
 
 
     def test_is_overdue_future(self):
@@ -43,7 +41,6 @@ class TaskModelTestCase(TestCase):
         self.assertFalse(task.is_overdue(current))
         
 
-
 class TodoViewTestCase(TestCase):
     def test_index_get(self):
         client = Client()
@@ -53,7 +50,6 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.templates[0].name,  'todo/index.html')
         self.assertEqual(len(response.context['tasks']), 0)
 
-    
 
     def test_index_post(self):
         client = Client()
@@ -64,7 +60,6 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.templates[0].name, 'todo/index.html')
         self.assertEqual(len(response.context['tasks']), 1)
 
-    
 
     def test_index_get_order_post(self):
         task1 = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
@@ -79,8 +74,8 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.context['tasks'][0], task2)
         self.assertEqual(response.context['tasks'][1], task1)
 
-    
-    
+
+
     def test_index_get_order_due(self):
         task1 = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
         task1.save()
@@ -94,4 +89,3 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.context['tasks'][0], task1)
         self.assertEqual(response.context['tasks'][1], task2)
 
-    
